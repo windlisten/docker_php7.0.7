@@ -102,8 +102,8 @@ RUN cd  /usr/local/exts/sqlsrv-5.2.0 && /usr/local/php7.0.7/bin/phpize && \
     make -j3 && make install
 RUN groupadd nginx && \
     useradd nginx -g nginx && \
-    echo "PATH=\$PATH:/usr/local/php7.0.7/bin" >> /root/.bashrc && \
-    echo "PATH=\$PATH:/usr/local/php7.0.7/sbin" >> /root/.bashrc && \
+    echo "export PATH=\$PATH:/usr/local/php7.0.7/bin" >> /root/.bashrc && \
+    echo "export PATH=\$PATH:/usr/local/php7.0.7/sbin" >> /root/.bashrc && \
     echo "export rm='rm -i'" >> /root/.bashrc && \
     echo "export cp='cp -i'" >> /root/.bashrc && \
     source /root/.bashrc && \
