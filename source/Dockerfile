@@ -1,5 +1,5 @@
 From centos:7.3.1611
-MAINTAINER qiwenzhi
+MAINTAINER wenzhi
 
 ADD ./package /usr/local
 RUN cd /usr/local && tar -zxvf pdo_sqlsrv-5.2.0.tgz && \
