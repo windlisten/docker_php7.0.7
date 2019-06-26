@@ -102,11 +102,6 @@ RUN cd  /usr/local/exts/sqlsrv-5.2.0 && /usr/local/php7.0.7/bin/phpize && \
     make -j3 && make install
 RUN groupadd nginx && \
     useradd nginx -g nginx && \
-    echo "export PATH=\$PATH:/usr/local/php7.0.7/bin" >> /root/.bashrc && \
-    echo "export PATH=\$PATH:/usr/local/php7.0.7/sbin" >> /root/.bashrc && \
-    echo "export rm='rm -i'" >> /root/.bashrc && \
-    echo "export cp='cp -i'" >> /root/.bashrc && \
-    source /root/.bashrc && \
     strip /usr/local/php7.0.7/bin/php && \
     strip /usr/local/php7.0.7/bin/php-cgi && \
     strip /usr/local/php7.0.7/sbin/php-fpm && \
@@ -122,6 +117,8 @@ RUN groupadd nginx && \
     yum erase wget deltarpm autoconf automake make gcc gcc-c++ -y
 
 ENV YII_ENV=dev
+ENV PATH=$PATH:/usr/local/php7.0.7/bin
+ENV PATH=$PATH:/usr/local/php7.0.7/sbin
 
 #启动php70
 CMD /etc/init.d/php-fpm start && tail -f /var/log/php-fpm.log 
