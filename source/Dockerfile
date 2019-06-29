@@ -1,4 +1,4 @@
-From centos:7.3.1611
+From wenzhi/centos7-systemd
 MAINTAINER wenzhi
 
 ADD ./package /usr/local
@@ -111,17 +111,18 @@ RUN groupadd nginx && \
     sed -i "s/php_fpm_CONF=@sysconfdir@\/php-fpm.conf/php_fpm_CONF=\/usr\/local\/php7\.0\.7\/etc\/php-fpm\.conf/g" /etc/init.d/php-fpm && \
     sed -i "s/php_fpm_PID=@localstatedir@\/run\/php-fpm\.pid/php_fpm_PID=\/var\/run\/php-fpm\.pid/g" /etc/init.d/php-fpm && \
     sed -i "s/;error_log = log\/php-fpm\.log/error_log = \/var\/log\/php-fpm\.log/" /usr/local/php7.0.7/etc/php-fpm.conf && \
+    sed -i "s/listen = 127\.0\.0\.1\:9000/listen = 0\.0\.0\.0\:9000/g" /usr/local/php7.0.7/etc/php-fpm.d/www.conf && \
     chmod a+x /etc/init.d/php-fpm && \
     rm -rf /usr/local/exts && \
     rm -rf /usr/local/php-7.0.7 && \
-    yum erase wget deltarpm autoconf automake make gcc gcc-c++ -y
+    yum erase wget deltarpm autoconf automake make gcc gcc-c++ -y && \
+    cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
+    yum clean all 
 
 ENV YII_ENV=dev
 ENV PATH=$PATH:/usr/local/php7.0.7/bin
 ENV PATH=$PATH:/usr/local/php7.0.7/sbin
 
 #启动php70
-CMD /etc/init.d/php-fpm start && tail -f /var/log/php-fpm.log 
+CMD /etc/init.d/php-fpm start && tail -f /dev/null
 EXPOSE 9000
-
-
