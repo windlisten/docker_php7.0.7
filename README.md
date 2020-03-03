@@ -80,5 +80,5 @@ nginx conf :
 ```  
 docker run -p9009:9000 -v /your-php-file-path:/var/www_data -d wenzhi/php7.0.7
 ### php-cli :
-alias docker_php='docker run -it --rm --name php -v $PWD:/usr/src/myapp -w /usr/src/myapp wenzhi/php7.0.7 php'      
+alias docker_php="docker run -it --rm -v /usr/src:/usr/src -v /home/xxx:/home/xxxx -w $PWD wenzhi/php7.0.7 php"
 docker_php test.php
